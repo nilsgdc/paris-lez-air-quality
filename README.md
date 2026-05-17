@@ -11,6 +11,10 @@ on NO₂ concentrations, with a socio-economic equity dimension.
 > concentrations at traffic-adjacent monitoring stations, and does this effect differ
 > by neighbourhood median income?
 
+![NO₂ time series — inside vs outside the LEZ, 2019–2023](outputs/timeseries_no2_zfe.png)
+
+*Hourly NO₂ averaged monthly, stations inside vs outside the Paris LEZ. The dashed line marks the June 2021 Crit'Air 3 ban.*
+
 ---
 
 ## Key findings
@@ -26,8 +30,17 @@ on NO₂ concentrations, with a socio-economic equity dimension.
 
 The LEZ is associated with an additional NO₂ reduction of **1.22 µg/m³** inside the zone,
 after controlling for wind speed, precipitation, and temperature.
+
+![Difference-in-differences — parallel trends and post-treatment gap](outputs/did_parallel_trends.png)
+
+*Treatment (inside-LEZ) and control (outside-LEZ) groups follow parallel trends pre-2021, supporting the DiD identification assumption. The treatment group's drop after June 2021 exceeds the control group's by 1.22 µg/m³.*
+
 The income interaction is not statistically significant — the LEZ effect does not
 measurably vary with neighbourhood income at this sample size.
+
+![NO₂ change vs neighbourhood median income](outputs/income_vs_no2_change.png)
+
+*Per-station post-vs-pre NO₂ change plotted against the median income of the nearest IRIS. No clear monotonic relationship emerges within the 36-station sample.*
 
 ---
 
@@ -42,6 +55,10 @@ measurably vary with neighbourhood income at this sample size.
 - **Income variable:** INSEE IRIS 2021 median disposable income, standardised (z-score),
   matched to each station via nearest-IRIS spatial join (EPSG:2154)
 - **Station coordinates:** OpenStreetMap Nominatim geocoding API
+
+![Map of Airparif monitoring stations and the Paris LEZ perimeter](outputs/map_stations_zfe.png)
+
+*13 treatment stations (inside the LEZ perimeter) and 23 control stations (outside), Airparif network, 2019–2023.*
 
 ---
 
