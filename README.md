@@ -121,11 +121,11 @@ to `{year}_NO2.csv` and place it in `data/raw/airparif/`.
 
 | Year | Dataset page |
 |------|------|
-| 2019 | search "2019 NO2" on the portal |
+| 2019 | [2019 NO2](https://data-airparif-asso.opendata.arcgis.com/datasets/6ac940f634c7422999bd3630b7359598) |
 | 2020 | [2020 NO2](https://data-airparif-asso.opendata.arcgis.com/datasets/0804fd34322d4ab38092a30632de7262) |
 | 2021 | [2021 NO2](https://data-airparif-asso.opendata.arcgis.com/datasets/8e17ad8f58204ea787a3bdfcf37903c3) |
 | 2022 | [2022 NO2](https://data-airparif-asso.opendata.arcgis.com/datasets/0da367910c13407288d75b5e2e93d11f) |
-| 2023 | search "2023 NO2" on the portal |
+| 2023 | [2023 NO2](https://data-airparif-asso.opendata.arcgis.com/datasets/3b7c61c20abf453a81e610e264ed91c0) |
 
 #### ZFE perimeter — Paris
 
