@@ -73,8 +73,8 @@ measurably vary with neighbourhood income at this sample size.
 │   ├── data_loader.py          # Centralised loading functions for all datasets
 │   └── cleaning.py             # Reusable cleaning pipeline (Airparif, INSEE)
 ├── data/
-│   ├── raw/                    # Source files (gitignored, 148 MB)
-│   └── processed/              # Cleaned exports: airparif_clean, meteo_clean, insee_iris_clean
+│   ├── raw/                    # Raw source files (~28 MB, all committed)
+│   └── processed/              # Cleaned exports + IDF-filtered IRIS shapefile
 ├── outputs/                    # Generated figures (committed for portfolio visibility)
 ├── requirements.txt
 └── README.md
@@ -107,25 +107,11 @@ source zfe-env/bin/activate      # Windows: zfe-env\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### 2. Download raw data
+### 2. Raw data is included in the repo
 
-Most raw data is **already included in the repo** (~25 MB total). You only need to
-download one file manually: the IGN CONTOURS-IRIS shapefile, which exceeds GitHub's
-100 MB per-file limit.
-
-All datasets are republished here under the French **Licence Ouverte (Etalab)** —
-sources listed in the table above.
-
-#### IGN — CONTOURS-IRIS shapefile (the only manual download)
-
-Direct archive (~250 MB compressed, .7z):
-[CONTOURS-IRIS_3-0__SHP_LAMB93_FXX_2024-01-01.7z](https://data.geopf.fr/telechargement/download/CONTOURS-IRIS/CONTOURS-IRIS_3-0__SHP_LAMB93_FXX_2024-01-01/CONTOURS-IRIS_3-0__SHP_LAMB93_FXX_2024-01-01.7z)
-
-Extract the full folder tree as-is into `data/raw/insee_iris/`. The shapefile
-ends up at `data/raw/insee_iris/CONTOURS-IRIS_3-0__SHP_LAMB93_FXX_2024-01-01/.../CONTOURS-IRIS.shp`
-(deep IGN delivery structure — don't flatten it, `load_iris_contours()` expects this path).
-
-#### What's already in the repo
+All raw datasets needed to run the analysis are committed here (~28 MB total).
+**No external download is required** — the project is fully reproducible from
+a single `git clone`.
 
 ```
 data/raw/
@@ -136,10 +122,26 @@ data/raw/
 │   └── zone-a-faibles-emissions.geojson            (Ville de Paris open data)
 └── insee_iris/
     ├── BASE_TD_FILO_IRIS_2021_DISP.csv             (INSEE FiLoSoFi 2021)
-    ├── meta_BASE_TD_FILO_IRIS_2021_DISP.csv        (INSEE variable dictionary)
-    └── CONTOURS-IRIS_3-0__SHP_LAMB93_FXX_2024-01-01/   ← TO DOWNLOAD (see above)
-        └── … (full IGN folder tree)
+    └── meta_BASE_TD_FILO_IRIS_2021_DISP.csv        (INSEE variable dictionary)
+
+data/processed/
+└── iris_idf/iris_idf.shp                           (IGN CONTOURS-IRIS pre-filtered to
+                                                     Île-de-France — see note below)
 ```
+
+**Note on the IGN CONTOURS-IRIS shapefile.** The full IGN national shapefile is
+123 MB (48,569 IRIS across France), too large for GitHub's per-file limit.
+Since the analysis only uses the ~2,750 IRIS of Paris + petite couronne
+(depts 75, 92, 93, 94), the repo ships a pre-filtered subset
+(`data/processed/iris_idf/iris_idf.shp`, 2.6 MB total across the shapefile
+companion files). Numerical results are identical — the DiD coefficient and
+the spatial join with stations are unchanged. If you want to regenerate the
+subset from the original national shapefile, source URL:
+[CONTOURS-IRIS_3-0__SHP_LAMB93_FXX_2024-01-01.7z](https://data.geopf.fr/telechargement/download/CONTOURS-IRIS/CONTOURS-IRIS_3-0__SHP_LAMB93_FXX_2024-01-01/CONTOURS-IRIS_3-0__SHP_LAMB93_FXX_2024-01-01.7z)
+(note: data.geopf.fr is occasionally unavailable).
+
+All datasets are republished under the French **Licence Ouverte (Etalab)** —
+attribution in the **Data sources** table above.
 
 ### 3. Run the notebooks
 

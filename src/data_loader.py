@@ -5,15 +5,7 @@ from pathlib import Path
 DATA_DIR = Path(__file__).parent.parent / "data" / "raw" / "airparif"
 PROCESSED_DIR = Path(__file__).parent.parent / "data" / "processed"
 ZFE_DIR = Path(__file__).parent.parent / "data" / "raw" / "zfe_perimetres"
-IRIS_DIR = (
-    Path(__file__).parent.parent
-    / "data" / "raw" / "insee_iris"
-    / "CONTOURS-IRIS_3-0__SHP_LAMB93_FXX_2024-01-01"
-    / "CONTOURS-IRIS_3-0__SHP_LAMB93_FXX_2024-01-01"
-    / "CONTOURS-IRIS"
-    / "1_DONNEES_LIVRAISON_2024-12-00164"
-    / "CONTOURS-IRIS_3-0_SHP_LAMB93_FXX-ED2024-01-01"
-)
+IRIS_IDF_PATH = PROCESSED_DIR / "iris_idf" / "iris_idf.shp"
 
 
 def load_airparif(year: int) -> pd.DataFrame:
@@ -95,8 +87,14 @@ def load_processed_insee() -> pd.DataFrame:
 
 def load_iris_contours() -> gpd.GeoDataFrame:
     """
-    Load IRIS geographic contours (IGN/INSEE, 2024 edition).
+    Load IRIS geographic contours, pre-filtered to inner Île-de-France.
+
+    Source: IGN CONTOURS-IRIS 3.0 (edition 2024-01-01), filtered to
+    departments 75, 92, 93, 94 (Paris + petite couronne) — 2,752 IRIS
+    instead of the 48,569 national IRIS. Filtering is done once
+    upstream so the repo ships a ~2.6 MB shapefile instead of 123 MB,
+    and no longer depends on the IGN download server.
+
     Reprojected from Lambert 93 (EPSG:2154) to WGS84 (EPSG:4326).
     """
-    filepath = IRIS_DIR / "CONTOURS-IRIS.shp"
-    return gpd.read_file(filepath).to_crs("EPSG:4326")
+    return gpd.read_file(IRIS_IDF_PATH).to_crs("EPSG:4326")
