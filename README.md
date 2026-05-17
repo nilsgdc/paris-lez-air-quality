@@ -5,7 +5,7 @@ on NO₂ concentrations, with a socio-economic equity dimension.
 
 ---
 
-## Business question
+## Research question
 
 > Did the Paris LEZ Crit'Air 3 ban (June 2021) lead to a measurable reduction in NO₂
 > concentrations at traffic-adjacent monitoring stations, and does this effect differ
