@@ -116,8 +116,9 @@ step). Get each file from the link below and place it at the exact path shown �
 #### Airparif — hourly NO₂
 
 Portal: [data-airparif-asso.opendata.arcgis.com](https://data-airparif-asso.opendata.arcgis.com/) ·
-For each dataset page, use the **Download → CSV** option, then rename the file
-to `{year}_NO2.csv` and place it in `data/raw/airparif/`.
+On each dataset page below, click **Download** (the export is CSV by default).
+Then rename the downloaded file to `{year}_NO2.csv` and place it in
+`data/raw/airparif/`.
 
 | Year | Dataset page |
 |------|------|
