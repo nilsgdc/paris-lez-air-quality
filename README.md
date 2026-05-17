@@ -84,13 +84,23 @@ measurably vary with neighbourhood income at this sample size.
 
 ## Data sources
 
+All datasets are committed in the repo (~28 MB total) and republished under
+the French **Licence Ouverte (Etalab)**.
+
 | Dataset | Source | Coverage |
 |---------|--------|----------|
 | NO₂ hourly measurements | [Airparif](https://www.airparif.fr/) | 36 stations, 2019–2023 |
 | LEZ perimeter | [data.gouv.fr](https://www.data.gouv.fr/) | Paris ZFE-m GeoJSON |
 | IRIS median income | [INSEE](https://www.insee.fr/) | Île-de-France, 2021 |
 | Weather controls | [Open-Meteo API](https://open-meteo.com/) | Paris, hourly, 2019–2023 |
-| IRIS geographic contours | [IGN](https://geoservices.ign.fr/) | France, 2024 edition |
+| IRIS geographic contours | [IGN](https://geoservices.ign.fr/) | France, 2024 edition (filtered to IDF) |
+
+*Note on the IRIS contours: the full IGN national shapefile is 123 MB (48,569 IRIS),
+above GitHub's per-file limit. The analysis only uses the ~2,750 IRIS of Paris +
+petite couronne (depts 75/92/93/94), so the repo ships a pre-filtered subset
+(`data/processed/iris_idf/iris_idf.shp`, 2.6 MB). Numerical results are identical.
+Original archive:
+[CONTOURS-IRIS_3-0__SHP_LAMB93_FXX_2024-01-01.7z](https://data.geopf.fr/telechargement/download/CONTOURS-IRIS/CONTOURS-IRIS_3-0__SHP_LAMB93_FXX_2024-01-01/CONTOURS-IRIS_3-0__SHP_LAMB93_FXX_2024-01-01.7z).*
 
 ---
 
@@ -107,43 +117,7 @@ source zfe-env/bin/activate      # Windows: zfe-env\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### 2. Raw data is included in the repo
-
-All raw datasets needed to run the analysis are committed here (~28 MB total).
-**No external download is required** — the project is fully reproducible from
-a single `git clone`.
-
-```
-data/raw/
-├── airparif/
-│   ├── 2019_NO2.csv … 2023_NO2.csv                 (Airparif open data, ArcGIS portal)
-│   └── stations_metadata.csv                       (geocoded via Nominatim — project-original)
-├── zfe_perimetres/
-│   └── zone-a-faibles-emissions.geojson            (Ville de Paris open data)
-└── insee_iris/
-    ├── BASE_TD_FILO_IRIS_2021_DISP.csv             (INSEE FiLoSoFi 2021)
-    └── meta_BASE_TD_FILO_IRIS_2021_DISP.csv        (INSEE variable dictionary)
-
-data/processed/
-└── iris_idf/iris_idf.shp                           (IGN CONTOURS-IRIS pre-filtered to
-                                                     Île-de-France — see note below)
-```
-
-**Note on the IGN CONTOURS-IRIS shapefile.** The full IGN national shapefile is
-123 MB (48,569 IRIS across France), too large for GitHub's per-file limit.
-Since the analysis only uses the ~2,750 IRIS of Paris + petite couronne
-(depts 75, 92, 93, 94), the repo ships a pre-filtered subset
-(`data/processed/iris_idf/iris_idf.shp`, 2.6 MB total across the shapefile
-companion files). Numerical results are identical — the DiD coefficient and
-the spatial join with stations are unchanged. If you want to regenerate the
-subset from the original national shapefile, source URL:
-[CONTOURS-IRIS_3-0__SHP_LAMB93_FXX_2024-01-01.7z](https://data.geopf.fr/telechargement/download/CONTOURS-IRIS/CONTOURS-IRIS_3-0__SHP_LAMB93_FXX_2024-01-01/CONTOURS-IRIS_3-0__SHP_LAMB93_FXX_2024-01-01.7z)
-(note: data.geopf.fr is occasionally unavailable).
-
-All datasets are republished under the French **Licence Ouverte (Etalab)** —
-attribution in the **Data sources** table above.
-
-### 3. Run the notebooks
+### 2. Run the notebooks
 
 ```bash
 jupyter notebook
