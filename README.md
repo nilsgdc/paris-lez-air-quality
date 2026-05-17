@@ -24,16 +24,16 @@ on NO₂ concentrations, with a socio-economic equity dimension.
 | LEZ causal effect (DiD) | **−1.22 µg/m³** (p < 0.001) |
 | General post-2021 trend | −3.49 µg/m³ across all stations |
 | Income interaction (did × income_std) | +0.049 (p = 0.121, not significant) |
-| R² — base model | 0.150 |
-| R² — model with income | 0.192 |
+| R² (base model) | 0.150 |
+| R² (model with income) | 0.192 |
 | Panel observations | 1,518,446 (hourly, 2019–2023) |
 
 The LEZ is associated with an additional NO₂ reduction of **1.22 µg/m³** inside the zone,
 after controlling for wind speed, precipitation, and temperature.
 
-![Difference-in-differences — parallel trends and post-treatment gap](outputs/did_parallel_trends.png)
+![DiD decomposition — group means before vs after the LEZ](outputs/did_parallel_trends.png)
 
-*Treatment (inside-LEZ) and control (outside-LEZ) groups follow parallel trends pre-2021, supporting the DiD identification assumption. The treatment group's drop after June 2021 exceeds the control group's by 1.22 µg/m³.*
+*Decomposition of the four group means underlying the diff-in-differences. The dashed line is the counterfactual (what the inside-LEZ group would have looked like had it followed the outside-LEZ trend). The raw gap shown here (−0.56 µg/m³) is the unconditional DiD; the −1.22 µg/m³ headline figure in the table above is the regression estimate after adding weather controls.*
 
 The income interaction is not statistically significant — the LEZ effect does not
 measurably vary with neighbourhood income at this sample size.
@@ -70,11 +70,12 @@ measurably vary with neighbourhood income at this sample size.
 │   ├── 02_cleaning.ipynb       # NaN treatment, interpolation, processed exports
 │   └── 03_analysis.ipynb       # Spatial classification, temporal trends, DiD, income
 ├── src/
-│   └── data_loader.py          # Centralised loading functions for all datasets
+│   ├── data_loader.py          # Centralised loading functions for all datasets
+│   └── cleaning.py             # Reusable cleaning pipeline (Airparif, INSEE)
 ├── data/
-│   ├── raw/                    # Source files (gitignored)
+│   ├── raw/                    # Source files (gitignored, 148 MB)
 │   └── processed/              # Cleaned exports: airparif_clean, meteo_clean, insee_iris_clean
-├── outputs/                    # Generated figures (gitignored)
+├── outputs/                    # Generated figures (committed for portfolio visibility)
 ├── requirements.txt
 └── README.md
 ```
@@ -121,6 +122,11 @@ Run them in order: `01` → `02` → `03`.
 3. **No station fixed effects:** unobserved station-level characteristics may bias estimates
 4. **IRIS income proxy:** neighbourhood income ≠ income of drivers on nearby roads
 5. **Station geocoding:** coordinates retrieved via Nominatim; precision affects spatial joins
+6. **COVID-19 confounding in the pre-treatment baseline:** the pre-ZFE window (2019–2021) includes
+   the French lockdowns of 2020 (March–May, October–December) and early 2021 (April–May), during
+   which traffic dropped 50–80%. This depresses the pre-ZFE NO₂ baseline and may bias the DiD
+   estimate. Lockdown periods are visible in the time series but are not explicitly excluded
+   from the model.
 
 ---
 
