@@ -60,7 +60,7 @@ measurably vary with neighbourhood income at this sample size.
 
 ![Map of Airparif monitoring stations and the Paris LEZ perimeter](outputs/map_stations_zfe.png)
 
-*13 treatment stations (inside the LEZ perimeter) and 23 control stations (outside), Airparif network, 2019–2023.*
+*Left: Paris core zoom showing the 13 treatment stations inside the LEZ. Right: full Île-de-France view including the outer suburban control stations. Airparif network, 2019–2023.*
 
 ---
 
