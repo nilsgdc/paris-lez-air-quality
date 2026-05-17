@@ -1,0 +1,37 @@
+station_code,latitude,longitude,geocoding_query
+OPERA,48.8702847,2.3322009,Place de l Opera Paris
+RN20,48.6509844,2.2724896,RN20 Montlhery France
+BP_EST,48.8535352,2.4106565,Boulevard Peripherique Est Paris (Porte de Montreuil)
+ARG,48.9479069,2.2481797,Argenteuil France
+AUB,48.9146078,2.3821895,Aubervilliers France
+AUT,48.8429916,2.2541496,Boulevard Peripherique Auteuil Paris
+A1,48.934268,2.3938596,Autoroute A1 Saint-Denis France
+BOB,48.906387,2.4452231,Bobigny France
+BONAP,48.8500174,2.3327059,Rue Bonaparte Paris
+CELES,48.8529643,2.3588236,Quai des Celestins Paris
+CHAMP,48.8137847,2.510611,Champigny-sur-Marne France
+EIFF3,48.8582599,2.2945006,Tour Eiffel Paris
+ELYS,48.8660671,2.3186526,Avenue des Champs Elysees Paris
+EVRY,48.6241665,2.4289667,Evry France
+GEN,48.9254221,2.2940122,Gennevilliers France
+GON,48.9863555,2.4500537,Gonesse France
+LOGNES,48.8384157,2.632722,Lognes France
+MANT,48.9891971,1.7140683,Mantes-la-Jolie France
+MELUN,48.539927,2.6608169,Melun France
+MONTG,48.7038873,2.4605107,Montgeron France
+NEUIL,48.884683,2.2695658,Neuilly-sur-Seine France
+PA07,48.8620069,2.3121028,Paris 7eme arrondissement France
+PA12,48.8442218,2.3811783,Paris 12eme arrondissement France
+PA13,48.8262845,2.3826887,Paris 13eme arrondissement France
+PA18,48.8853615,2.3519368,Paris 18eme arrondissement France
+RUR-SE,48.4481484,2.7290407,Foret de Fontainebleau France
+RUR-SO,48.7296735,1.7777854,Foret de Rambouillet France
+STDEN,48.9383732,2.3627508,Saint-Denis France
+TREMB,48.9802035,2.5589558,Tremblay-en-France France
+HAUS,48.8735063,2.3289439,Boulevard Haussmann Paris
+VERS,48.8035403,2.1266886,Versailles France
+VILLEM,48.881886,2.5076181,Villemomble France
+VITRY,48.7876,2.39164,Vitry-sur-Seine France
+RN2,48.8965023,2.4019804,Route Nationale 2 Pantin France
+RN6,48.5579436,2.637426,Route Nationale 6 Melun France
+PA15L,48.8401232,2.3024509,Paris 15eme arrondissement France

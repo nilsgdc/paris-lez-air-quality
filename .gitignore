@@ -18,8 +18,12 @@ dist/
 .ipynb_checkpoints/
 *.ipynb_checkpoints
 
-# Data — raw sources are too large / not redistributable
-data/raw/
+# Data: raw sources are too large / not redistributable
+# (kept locally — must be re-downloaded from official portals to reproduce, see README)
+data/raw/*
+!data/raw/airparif/
+data/raw/airparif/*
+!data/raw/airparif/stations_metadata.csv
 
 # Secrets
 .env

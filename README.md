@@ -96,22 +96,54 @@ measurably vary with neighbourhood income at this sample size.
 
 ## How to run
 
+### 1. Environment
+
 ```bash
-# 1. Create and activate virtual environment
+# Create and activate the virtual environment
 python -m venv zfe-env
 source zfe-env/bin/activate      # Windows: zfe-env\Scripts\activate
 
-# 2. Install dependencies
+# Install dependencies
 pip install -r requirements.txt
+```
 
-# 3. Place raw data in data/raw/ (see Data sources above)
+### 2. Download raw data
 
-# 4. Run notebooks in order
+Raw data is not redistributed (148 MB, and some sources require a request).
+Download the following files from the official portals and place them at the
+**exact paths** below — `src/data_loader.py` expects this structure.
+
+```
+data/raw/
+├── airparif/
+│   ├── 2019_NO2.csv                                ← from data.airparif.fr (hourly NO₂)
+│   ├── 2020_NO2.csv                                ← from data.airparif.fr
+│   ├── 2021_NO2.csv                                ← from data.airparif.fr
+│   ├── 2022_NO2.csv                                ← from data.airparif.fr
+│   ├── 2023_NO2.csv                                ← from data.airparif.fr
+│   └── stations_metadata.csv                       ← included in the repo (do not delete)
+├── zfe_perimetres/
+│   └── zone-a-faibles-emissions.geojson            ← from data.gouv.fr (search "ZFE")
+└── insee_iris/
+    ├── BASE_TD_FILO_IRIS_2021_DISP.csv             ← from insee.fr (FiLoSoFi 2021)
+    └── CONTOURS-IRIS_3-0__SHP_LAMB93_FXX_2024-01-01/
+        └── ... (unzip the IGN archive as-is)       ← from geoservices.ign.fr
+```
+
+Source URLs are listed in the **Data sources** table above.
+`stations_metadata.csv` (Airparif station coordinates geocoded via Nominatim)
+is committed to the repo as an exception so the analysis is runnable as soon
+as you have the upstream data files.
+
+### 3. Run the notebooks
+
+```bash
 jupyter notebook
 ```
 
-Notebooks are self-contained and load data via `src/data_loader.py`.
-Run them in order: `01` → `02` → `03`.
+Open and run the notebooks in order: `01_exploration` → `02_cleaning` → `03_analysis`.
+Notebook 02 generates `data/processed/`; notebook 03 generates the figures in `outputs/`
+and prints the final DiD coefficient (**−1.22 µg/m³**, p < 0.001).
 
 ---
 
