@@ -3,6 +3,8 @@
 A causal inference study measuring the effect of the Paris Low Emission Zone (ZFE-m)
 on NO₂ concentrations, with a socio-economic equity dimension.
 
+[![Run on Kaggle](https://kaggle.com/static/images/open-in-kaggle.svg)](https://www.kaggle.com/code/eternalia/paris-lez-air-quality-analysis)
+
 ---
 
 ## Research question
