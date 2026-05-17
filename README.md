@@ -110,15 +110,16 @@ pip install -r requirements.txt
 ### 2. Download raw data
 
 Raw data is not redistributed (148 MB, some sources require an explicit download
-step). Get each file from the link below and place it at the exact path shown —
-`src/data_loader.py` looks for these names.
+step). The three target folders already exist in the repo (`data/raw/airparif/`,
+`data/raw/zfe_perimetres/`, `data/raw/insee_iris/`) — you only drop the downloaded
+files into them. `src/data_loader.py` expects the exact filenames shown below.
 
 #### Airparif — hourly NO₂
 
 Portal: [data-airparif-asso.opendata.arcgis.com](https://data-airparif-asso.opendata.arcgis.com/) ·
-On each dataset page below, click **Download** (the export is CSV by default).
-Then rename the downloaded file to `{year}_NO2.csv` and place it in
-`data/raw/airparif/`.
+On each dataset page below, click **Download**. The portal returns the file
+**without a file extension** — rename it to `{year}_NO2.csv` (add the `.csv`
+yourself) and drop it in `data/raw/airparif/`.
 
 | Year | Dataset page |
 |------|------|

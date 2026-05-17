@@ -18,12 +18,21 @@ dist/
 .ipynb_checkpoints/
 *.ipynb_checkpoints
 
-# Data: raw sources are too large / not redistributable
-# (kept locally — must be re-downloaded from official portals to reproduce, see README)
+# Data: raw sources are too large / not redistributable.
+# Folder structure is committed (via .gitkeep) so users only drop the
+# downloaded files into the existing folders. See README "Download raw data".
 data/raw/*
 !data/raw/airparif/
+!data/raw/zfe_perimetres/
+!data/raw/insee_iris/
+
 data/raw/airparif/*
+data/raw/zfe_perimetres/*
+data/raw/insee_iris/*
+
 !data/raw/airparif/stations_metadata.csv
+!data/raw/zfe_perimetres/.gitkeep
+!data/raw/insee_iris/.gitkeep
 
 # Secrets
 .env
