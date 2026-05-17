@@ -109,31 +109,58 @@ pip install -r requirements.txt
 
 ### 2. Download raw data
 
-Raw data is not redistributed (148 MB, and some sources require a request).
-Download the following files from the official portals and place them at the
-**exact paths** below — `src/data_loader.py` expects this structure.
+Raw data is not redistributed (148 MB, some sources require an explicit download
+step). Get each file from the link below and place it at the exact path shown —
+`src/data_loader.py` looks for these names.
+
+#### Airparif — hourly NO₂
+
+Portal: [data-airparif-asso.opendata.arcgis.com](https://data-airparif-asso.opendata.arcgis.com/) ·
+For each dataset page, use the **Download → CSV** option, then rename the file
+to `{year}_NO2.csv` and place it in `data/raw/airparif/`.
+
+| Year | Dataset page |
+|------|------|
+| 2019 | search "2019 NO2" on the portal |
+| 2020 | [2020 NO2](https://data-airparif-asso.opendata.arcgis.com/datasets/0804fd34322d4ab38092a30632de7262) |
+| 2021 | [2021 NO2](https://data-airparif-asso.opendata.arcgis.com/datasets/8e17ad8f58204ea787a3bdfcf37903c3) |
+| 2022 | [2022 NO2](https://data-airparif-asso.opendata.arcgis.com/datasets/0da367910c13407288d75b5e2e93d11f) |
+| 2023 | search "2023 NO2" on the portal |
+
+#### ZFE perimeter — Paris
+
+Direct GeoJSON (1 click):
+[zone-a-faibles-emissions.geojson](https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/zone-a-faibles-emissions/exports/geojson) →
+save to `data/raw/zfe_perimetres/zone-a-faibles-emissions.geojson`.
+
+#### INSEE — FiLoSoFi 2021 IRIS disposable income
+
+Direct CSV-ZIP:
+[BASE_TD_FILO_IRIS_2021_DISP_CSV.zip](https://www.insee.fr/fr/statistiques/fichier/8229323/BASE_TD_FILO_IRIS_2021_DISP_CSV.zip) →
+unzip into `data/raw/insee_iris/` (keeps `BASE_TD_FILO_IRIS_2021_DISP.csv`).
+
+#### IGN — CONTOURS-IRIS shapefile (2024-01-01, Lambert 93)
+
+Direct archive (~250 MB compressed, .7z):
+[CONTOURS-IRIS_3-0__SHP_LAMB93_FXX_2024-01-01.7z](https://data.geopf.fr/telechargement/download/CONTOURS-IRIS/CONTOURS-IRIS_3-0__SHP_LAMB93_FXX_2024-01-01/CONTOURS-IRIS_3-0__SHP_LAMB93_FXX_2024-01-01.7z) →
+extract the full folder tree as-is into `data/raw/insee_iris/`. The shapefile
+ends up at `data/raw/insee_iris/CONTOURS-IRIS_3-0__SHP_LAMB93_FXX_2024-01-01/.../CONTOURS-IRIS.shp`
+(deep IGN delivery structure — don't flatten it, `load_iris_contours()` expects this path).
+
+#### Expected structure when done
 
 ```
 data/raw/
 ├── airparif/
-│   ├── 2019_NO2.csv                                ← from data.airparif.fr (hourly NO₂)
-│   ├── 2020_NO2.csv                                ← from data.airparif.fr
-│   ├── 2021_NO2.csv                                ← from data.airparif.fr
-│   ├── 2022_NO2.csv                                ← from data.airparif.fr
-│   ├── 2023_NO2.csv                                ← from data.airparif.fr
-│   └── stations_metadata.csv                       ← included in the repo (do not delete)
+│   ├── 2019_NO2.csv … 2023_NO2.csv                 (5 files, downloaded above)
+│   └── stations_metadata.csv                       (included in the repo — geocoded coords)
 ├── zfe_perimetres/
-│   └── zone-a-faibles-emissions.geojson            ← from data.gouv.fr (search "ZFE")
+│   └── zone-a-faibles-emissions.geojson
 └── insee_iris/
-    ├── BASE_TD_FILO_IRIS_2021_DISP.csv             ← from insee.fr (FiLoSoFi 2021)
+    ├── BASE_TD_FILO_IRIS_2021_DISP.csv
     └── CONTOURS-IRIS_3-0__SHP_LAMB93_FXX_2024-01-01/
-        └── ... (unzip the IGN archive as-is)       ← from geoservices.ign.fr
+        └── … (full IGN folder tree)
 ```
-
-Source URLs are listed in the **Data sources** table above.
-`stations_metadata.csv` (Airparif station coordinates geocoded via Nominatim)
-is committed to the repo as an exception so the analysis is runnable as soon
-as you have the upstream data files.
 
 ### 3. Run the notebooks
 
