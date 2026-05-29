@@ -77,7 +77,7 @@ measurably vary with neighbourhood income at this sample size.
 ├── data/
 │   ├── raw/                    # Raw source files (~28 MB, all committed)
 │   └── processed/              # Cleaned exports + IDF-filtered IRIS shapefile
-├── outputs/                    # Generated figures (committed for portfolio visibility)
+├── outputs/                    # Generated figures
 ├── requirements.txt
 └── README.md
 ```
